@@ -9,6 +9,17 @@
   * [Cost Function(目的関数)](#cost-function目的関数)
   * [Cost Function - Intuition Ⅰ](#cost-function---intuition-Ⅰ)
   * [Cost Function - Intuition Ⅱ](#cost-function---intuition-Ⅱ)
+* [Parameter Learning](#parameter-learning)
+  * [Gradient Descent](#gradient-descent)
+  * [Gradient Descent Intuition](#gradient-descent-intuition)
+  * [Gradient Descent For Linear Regression](#gradient-descent-for-linear-regression)
+* [Linear Algebra Review](#linear-algebra-review)
+  * [Matrices and Vectors](#matrices-and-vectors) 
+  * [Addition and Scalar Multiplication](#addition-and-scalar-multiplication)
+  * [Matrix Vector Multiplication](#matrix-vector-multiplication)
+  * [Matrix Matrix Multiplication](#matrix-matrix-multiplication)
+  * [Matrix Multiplication Properties](#matrix-multiplication-properties)
+  * [Inverse and Transpose](#inverse-and-transpose)
 
 ## Introduction
 
