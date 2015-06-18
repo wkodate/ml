@@ -94,10 +94,70 @@
 
 * 逆行列: pinv(A)
 
-#### Platting Data
+#### Plotting Data
+
+* データのプロットの説明
+
+* プロット: plot(t, y1), プロットを閉じる: close
+
+* データを重ねる: hold on
+
+* グラフの色を変える: plot(t, y1, 'r')
+
+* ラベル: xlabel('time'), ylabel('value'), タイトル:title('my plot') 
+
+* 凡例: legend('sin', 'cos')
+
+* グラフを保存: print -dpng 'myplot.png'
+
+* グラフに番号を指定: figure(2)
+
+* グラフを分割して表示: subplot()
+
+* グラフのメモリ指定: axis([0.5 1 -1 1])
+
+* グラフをクリア: clf
+
+* 行列を可視化: imagesc(A)
+
+* グラフのカラー指定: colorbar, カラーマップ: colormap gray
+
+* 関数呼び出しの連鎖: a=1, b=2, c=3
 
 #### Control Statements: for, while, if statement
 
+* Octaveにおける制御分と関数定義
+
+* for文: for i=1:10, v(i)=2^i; end;
+
+* while文: i=1;while i<=5, v(i)=100;i=i+1;end;
+
+* if文: i=1;while true, v(i)=999; i=i+1; if i== 6, break;end;end;
+
+* 関数の定義:
+
+```
+function y squareThisNumber(x)
+y=x^2;
+```
+
+* Octaveにパス追加: addpath('/User/wkodate')
+
 #### Vectorization
 
+* 計算式をベクトル化して計算を簡単にする話
+
+* 1からnまでの合計を計算(非ベクトル化)→thetaの転置行列との内積を計算(ベクトル化)
+
+* Gradient descentをベクトル化して計算
+
 #### Normal Equation Noninvertibility
+
+* 正規方程式と非可逆性の説明。おまけの題材
+
+* 擬似逆行列pinv, 逆行列inv
+
+* 転置XとXが非可逆(非正則行列) とは？
+
+  1. 学習の問題に対して何らかの冗長なfeatureがある。それぞれのfeatureがが依存しているなど
+  2. 大量のfeatureに何らかのアルゴリズムを実行している(featureに対して訓練サンプル数が少ない)
