@@ -1,5 +1,21 @@
 ## Index
 
+* [Classification and Representation](#classification-and-representation)
+  * [Classification](#classification)
+  * [Hypothesis Representation](#hypothesis-representation)
+  * [Decision Boundary](#decision-boundary)
+* [Logistic Regression Model](#logistic-regression-model)
+  * [Cost Function](#cost-function)
+  * [Simplified Cost Function and Gradient Descent](#simplified-cost-function-and-gradient-descent)
+  * [Advanced Optimization](#advanced-optimization)
+* [Multiclass Classification](#multiclass-classification)
+  * [Multiclass Classification: One-vs-all](#multiclass-classification-one-vs-all) 
+* [Solving the Problem of Overfitting](#solving-the-problem-of-overfitting)
+  * [The Problem of Overfitting](#the-problem-of-overfitting) 
+  * [Cost Function](#cost-function-1)
+  * [Regularized Linear Regression](#regularized-linear-regression)
+  * [Regularized Logistic Regression](#regularized-logistic-regression)
+
 ## Classification and Representation
 
 #### Classification
