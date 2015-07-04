@@ -84,10 +84,48 @@
 
 #### The Problem of Overfitting
 
+* アンダーフィッティングとオーバーフィッティング。フィーテャーを最適な数にする
+
+* 線形回帰、ロジスティック回帰で共に起こり得る
+
+* オーバーフィッティングの対策
+　　1. 特徴の数を減らす
+    * 人力で特徴を選ぶ
+    * 自動的に特徴の数を減らすアルゴリズム
+   2. 正規化
+     * 全ての特徴を維持してthetaの倍率を下げる
+
 #### Cost Function
+
+* オーバーフィッティングを防ぐための、正規化で使うコスト関数の話
+  * パラメータが小さい値の場合、シンプルな仮説となる
+  * 各パラメータを小さく保つ
+  
+* 正規化コスト関数
+
+![正規化コスト関数](https://github.com/wkodate/CourseraML/blob/master/week3/images/week3-3-1.png)
+
+* λ(正規化パラメータ)を大きくすると、コスト関数を最小化するためにθを小さくする必要があるため、仮説はシンプルになりアンダーフィッティングとなる
 
 #### Regularized Linear Regression
 
+* 正規化された最急降下法のアップデート関数
+
+![正規化された最急降下法のアップデート関数](https://github.com/wkodate/CourseraML/blob/master/week3/images/week3-3-2.png)
+
+* 各イテレーションごとにθjを少しだけ1より小さくしたものをかけて、いつもどおりの項を引いてアップデートする
+
+* 正規化された正規方程式のアップデート関数 
+
+![正規化された正規方程式のアップデート関数](https://github.com/wkodate/CourseraML/blob/master/week3/images/week3-3-3.png)
+
 #### Regularized Logistic Regression
 
+* 正規化されたロジスティック回帰のコスト関数
+
+![正規化されたロジスティック回帰のコスト関数](https://github.com/wkodate/CourseraML/blob/master/week3/images/week3-3-4.png)
+
+* 正規化されたロジスティック回帰最急降下法
+
+![正規化されたロジスティック回帰の最急降下法](https://github.com/wkodate/CourseraML/blob/master/week3/images/week3-3-5.png)
 
