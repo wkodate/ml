@@ -19,3 +19,50 @@
 #### Neurons and the Brain
 
 * 脳が勝手に学習する→これを機械学習のアルゴリズムに応用
+
+## Neural Networks
+
+#### Model Representation Ⅰ
+
+* ニューロンを単なるロジスティックの単位としてモデル化する
+
+![ニューロンモデル](https://github.com/wkodate/CourseraML/blob/master/week4/images/week4-2-1.png)
+
+* x0はバイアスユニットと呼ばれ、必ず1になる
+
+* 用語の話
+  * sigmoid関数はactivation関数と呼ぶ
+  * モデルはweights(parameters)と呼ぶ
+  * 最初のレイヤーxは入力レイヤー、最後のレイヤーyは出力レイヤー、あいだのレイヤーaは隠れたレイヤー
+  * a(j)i: レイヤーjのニューロン(ユニット)iのアクティベーション(シグモイド)
+  * θ(j): レイヤーjからレイヤーj+1のマッピング関数をコントロールする重みの行列
+
+* 一つの隠れ層があるときの各アクティベーションノードと仮説
+
+![隠れ層のアクティベーション](https://github.com/wkodate/CourseraML/blob/master/week4/images/week4-2-2.png)
+
+![隠れ層のアクティベーション(詳細)](https://github.com/wkodate/CourseraML/blob/master/week4/images/week4-2-3.png)
+
+* レイヤーjがsjユニット、レイヤーj+1が sj+1ユニット のネットワークでは、θ(j)はのsj+1×(sj +1)次元になる
+
+#### Model Representation Ⅱ
+
+* フォワードプロパゲーションのベクトル化
+
+![フォワードプロパゲーションのベクトル化](https://github.com/wkodate/CourseraML/blob/master/week4/images/week4-2-4.png)
+
+![フォワードプロパゲーションのベクトル化2](https://github.com/wkodate/CourseraML/blob/master/week4/images/week4-2-5.png)
+
+* 最終的な仮説
+
+![仮説の式](https://github.com/wkodate/CourseraML/blob/master/week4/images/week4-2-6.png)
+
+
+* フォワードプロパゲーション: 入力から始めて、隠れ層に対して前方(フォワード)に伝搬(プロパゲート)させてアクティベーションを計算し、
+それを更に前方へ伝搬させていって、出力レイヤーのアクティベーションを計算
+
+* ニューラルネットワークはロジスティック回帰の入力をx1, x2, x3に制限する代わりに、独自のfeature a1, a2, a3を学習して、
+それをロジスティック回帰として考える
+
+* ニューラルネットワークがどう接続されるかはアーキテクチャと呼ばれる
+ 
