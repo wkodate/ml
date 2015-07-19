@@ -1,16 +1,16 @@
 ## Index
 
-* [Cost Function and Backpropagation](#)
-  * [Cost Function](#)
-  * [Backpropagation Algorithm](#)
-  * [Backpropagation Intuition](#)
-* [Backpropagation in Practice](#)
-  * [Implementation Note: Unrolling Parameters](#)
-  * [Gradient Checking](#)
-  * [Random Initialization](#)
-  * [Putting It Together](#)
-* [Application of Neural Networks](#)
-  * [Autonomous Driving](#)
+* [Cost Function and Backpropagation](#cost-function-and-backpropagation)
+  * [Cost Function](#cost-function)
+  * [Backpropagation Algorithm](#backpropagation-algorithm)
+  * [Backpropagation Intuition](#backpropagation-intuition)
+* [Backpropagation in Practice](#backpropagation-in-practice)
+  * [Implementation Note: Unrolling Parameters](#implementation-note-unrolling-parameters)
+  * [Gradient Checking](#gradient-checking)
+  * [Random Initialization](#random-initialization)
+  * [Putting It Together](#putting-it-together)
+* [Application of Neural Networks](#application-of-neural-networks)
+  * [Autonomous Driving](#autonomous-driving)
 
 ## Cost Function and Backpropagation
 
