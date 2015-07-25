@@ -4,6 +4,19 @@
   * [Deciding What to Try Next](#)
   * [Evaluating a Hypothesis](#)
   * [Model Selection and Train/Validation/Test Sets](#)
+* [Bias vs. Variance](#)
+  * [Diagnosing Bias vs. Variance](#)
+  * [Regulation and Bias/Variance](#)
+  * [Learning Curves](#)
+  * [Deciding What to Do Next Revisited](#)
+* [Building a Spam Classifier](#)
+  * [Prioritizing What to Work On](#)
+  * [Error Analysis](#)
+* [Handling Skewed Data](#)
+  * [Error Metrics for Skewed Classes](#)
+  * [Trading Off Precision and Recall](#)
+* [Using Large Data Sets](#)
+  * [Data For Machine Learning](#)
 
 ## Evaluating a Learning Algorithm
 
@@ -132,4 +145,84 @@
 * 小さなニューラルネットワーク(隠れ層が少ない)のときはパラメータが少なく、アンダーフィッティングになりがち
 
 * 大きなニューラルネットワーク(隠れ層が多き)のときはパラメータが多く、オーバーフィッティングになりがち
+
+## Building a Spam Classifier
+
+#### Prioritizing What to Work On
+
+* スパム分類器の構築は、頻出単語から10000-50000くらい選んでこれらをフィーチャーとして使う
+
+* スパム分類器をより良くする上で、次に何を優先にして取り組むべきか
+  * トレーニングデータとして利用するスパムのメールを多く集める
+  * emailヘッダからemailルーティング情報に基づいたより洗練された特徴を見つける
+  * メセージボディ(テキスト)から洗練されたフィーチャーを見つける。discountとdiscountsは同じ?dealとDealerは同じ？句読点や記号についての情報など
+  * ミススペルを検出するための洗練されたアルゴリズムの開発。m0rtage, med1cine, w4tches
+
+#### Error Analysis
+
+エラー分析
+* 学習の問題に取り組むべきアプローチ
+  * シンプルなアルゴリズムで実装。クロスバリデーションデータでテスト
+  * 多くのデータが必要か判断するために、学習曲線をプロット
+  * エラー分析: クロスバリデーションセットをみて、誤分類となったデータを人力で見ていく。これらのサンプルにシステマティックなパターンが無いかみる
+
+* エラー分析でエラーとなったサンプルを手動でカテゴライズ
+  1. emailの種類は何なのか。スパムメールのなかでも薬関係、レプリカ販売、フィッシングなのか
+    * 薬関係12, レプリカ4, フィッシング53, その他31だったとすると、フィッシングのメールに対してアルゴリズムがうまく機能していないのかがわかる
+  2.  どんな手がかりがあれば、どんなフィーチャーがあればこれらをうまく分類できるのか
+    * ミススペル、異常なルーティング、おかしい句読点など のカテゴライズから、検出アルゴリズムをより洗練することができる
+
+* これらによってアルゴリズムの貧弱な部分を素早く見つけることができる
+
+* アルゴリズムを数値的に評価するために、正確さやエラーなど何でもいいが単一の実数値が返ってくることが重要
+  * ステミングソフトウェア(Porter stemmerなど)で文字列の一致を判断できるが、このアルゴリズムを使うべきかどうか。ステムありなしでクロスバリデーション誤差を見てみて、ステムを使うのが良いか判断できる
+  * 大文字と小文字を区別するべきかどうかなどもそれぞれのクロスバリデーション誤差から判断
+  * エラー分析を行うにあたってテストセットではなくクロスバリデーションセットを使うことを強く推奨
+
+## Handling Skewed Data
+
+#### Error Metrics for Skewed Classes
+
+* がんの分類の例で、ロジスティック回帰モデルをトレーニングして、テストセットで1%のエラー。実際には0.5%の患者ががんであり、全ての入力に対してがんではない(y=0)と予測したほうが精度が高くなってしまう。陰性の手本が陰性の手本に比べて極端に少ない。これをスキュークラス
+
+* エラー分析ではエラーを改善したかどうかを明らかにすることができない
+
+* 別の評価指標、精度と再現率
+  * y=1がレアなクラスでそれを検出したい
+  * 実際のクラス(Actual class)のバイナリ分類と、予測のクラス(Predicted class)の2×2のテーブルで考える
+  * Actual class=1, Predicted class=1はTrue positive(真陽性)と呼ばれる手本
+  * Actual class=0, Predicted class=0はTrue negative(真陰性)と呼ばれる手本
+  * Actual class=1, Predicted class=0はFalse positive(偽陽性)と呼ばれる手本
+  * Actual class=0, Predicted class=1はFalse negative(偽陰性)と呼ばれる手本
+  * Precisionはがんと予測した患者に対する実際にがんだった患者の割合 
+    * True positive / #Predicted positive = True positive / (True pos + False pos)
+  * Recallは全てのがん患者に対して、患者ががんだと予測できた割合
+    * True positive / #Actual Positive = True positive / (True pos + False neg)
+
+![Precision/Recall](https://github.com/wkodate/CourseraML/blob/master/week6/images/week6-4-1.png)
+
+#### Trading Off Precision and Recall
+
+* PrecisionとRecallのトレードオフ
+  * hθ(x)の1,0のしきい値を0.5よりも上げる。確実にがんのときだけがんと告げる=Higher precision, lower recall
+  * hθ(x)の1,0のしきい値を0.5よりも下げる。がんの可能性がある患者にはがんと告げる(がんの見逃しを避ける。)=Higher recall, lower precision
+
+* どのようにPrecisionとRecallを決定すればよいか
+  * Average: (Precision+Recall)/2は良い指標ではない。Precission=0.02, Recall=1.0でも0.5付近になってしまうため
+  * FスコアでPrecisionとRecallの平均をとるものだが、どちらも一定以上の値でないと大きい値にならない。F1スコアとも呼ぶ。
+  * P=0 or R=0 → F=0
+  * P=1 and R=1 → F=1
+
+![FScore](https://github.com/wkodate/CourseraML/blob/master/week6/images/week6-4-2.png)
+
+
+## Using Large Data Sets
+
+#### Data For Machine Learning
+
+* 多くのパラメータをもった学習アルゴリズム(=低バイアスアルゴリズム)はJtrainがとても小さくなる
+
+* ここで大量のトレーニングセットがあるときはJtrain(θ)=Jtest(θ)となる。低分散
+
+* これら２つを合わせるとJtestは小さくなる。低バイアス、低分散のアルゴリズムとなる。大量にデータで大量にフィーチャーがあるとき、高いパフォーマンスの学習アルゴリズムを得る
 
